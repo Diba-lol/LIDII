@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Story | Happy Birthday</title>
+
+  <!-- Editorial Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,600&family=Montserrat:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="base.css" />
+  <link rel="stylesheet" href="page2.css" />
+</head>
+
+<body class="scrollable-page">
+
+  <!-- Thin Gold Reading Progress Line -->
+  <div class="progress-track">
+    <div class="progress-fill" id="progressBar"></div>
+  </div>
+
+  <!-- Ambient Golden Sparkle Dust -->
+  <div class="sparkles-container">
+    <span class="sparkle s1">✦</span>
+    <span class="sparkle s2">✧</span>
+    <span class="sparkle s3">✦</span>
+    <span class="sparkle s4">✧</span>
+  </div>
+
+  <div class="editorial-container">
+
+    <!-- ================= CHAPTER HEADER ================= -->
+    <header class="editorial-header" data-reveal="fade-up">
+      <div class="chapter-badge">
+        <span class="chapter-rule"></span>
+        <span class="chapter-name">OUR FIRST BIRTHDAY TOGETHER • 2026</span>
+        <span class="chapter-rule"></span>
+      </div>
+      <h1 class="editorial-title">Every Quiet & Beautiful Moment With You, Lidi</h1>
+      <p class="scroll-prompt">
+        <span class="scroll-mouse"><span class="mouse-dot"></span></span>
+        Scroll down into our first chapter
+      </p>
+    </header>
+
+    <!-- ================= 1. THE OPEN SCRAPBOOK ================= -->
+    <section class="story-section" data-reveal="zoom-in">
+      <div class="binder-book">
+
+        <!-- Left Leaf: Birthday Letter -->
+        <article class="leaf leaf-left" data-stagger="left">
+          <div class="leaf-inner">
+            <div class="milestone-badge">
+              <span class="milestone-num">20</span>
+              <span class="milestone-sparkle">🧁</span>
+            </div>
+
+            <h2 class="leaf-greeting">Happy Birthday, my sweet Lidi</h2>
+            <div class="gold-accent-line"></div>
+
+            <p class="leaf-prose">
+              2026 will always be my favorite year, because it's the year Evangelin Lydia walked into my life and made
+              everything softer, warmer, and so much brighter.
+            </p>
+            <p class="leaf-prose">
+              This is our very first birthday together, and I don't just want today with you — I want all your
+              tomorrows, every goofy laugh, and every quiet morning by your side.
+            </p>
+
+            <span class="leaf-sign">forever & always yours, Dibi ♡</span>
+          </div>
+        </article>
+
+        <!-- Center 3D Brushed Titanium Binder Spine -->
+        <div class="metallic-spine">
+          <div class="ring-socket">
+            <div class="punch-hole"></div>
+            <div class="titanium-ring"></div>
+          </div>
+          <div class="ring-socket">
+            <div class="punch-hole"></div>
+            <div class="titanium-ring"></div>
+          </div>
+          <div class="ring-socket">
+            <div class="punch-hole"></div>
+            <div class="titanium-ring"></div>
+          </div>
+          <div class="ring-socket">
+            <div class="punch-hole"></div>
+            <div class="titanium-ring"></div>
+          </div>
+          <div class="ring-socket">
+            <div class="punch-hole"></div>
+            <div class="titanium-ring"></div>
+          </div>
+          <div class="ring-socket">
+            <div class="punch-hole"></div>
+            <div class="titanium-ring"></div>
+          </div>
+        </div>
+
+        <!-- Right Leaf: Polaroid on Candy Striped Kraft Paper -->
+        <article class="leaf leaf-right" data-stagger="right">
+          <div class="stripes-canvas"></div>
+
+          <div class="polaroid-assembly">
+            <div class="serrated-washi"></div>
+            <figure class="polaroid-frame">
+              <img src="./images/img5.jpeg" alt="Evangelin Lydia" class="polaroid-photo" />
+              <figcaption class="polaroid-legend">my prettiest lidi in the universe ♡</figcaption>
+            </figure>
+          </div>
+
+          <span class="scrap-sticker stamp-heart">❤</span>
+          <span class="scrap-sticker stamp-star">✨</span>
+          <p class="cursive-whisper">i love you so much, lidi!</p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ================= 2. KEEPSAKE ENVELOPE & JOURNAL ENTRY ================= -->
+    <section class="story-section" data-reveal="fade-up">
+      <div class="keepsake-grid">
+
+        <!-- Clickable Keepsake Envelope -->
+        <div class="vellum-pocket-card" data-stagger="left" onclick="togglePocketEnvelope()">
+          <div class="vellum-envelope" id="pocketEnvelope">
+            <!-- Solid interior prevents background from bleeding through triangular folds -->
+            <div class="envelope-interior"></div>
+
+            <div class="vellum-flap"></div>
+
+            <!-- Photo that pulls up when opened -->
+            <div class="tucked-snapshot" id="tuckedPhoto">
+              <img src="./images/img10.jpeg" alt="Lidi Memory"/>
+              <span class="snapshot-note">always you, lidi ♡</span>
+            </div>
+
+            <!-- Front pocket with wax seal -->
+            <div class="vellum-pocket-front">
+              <div class="mini-wax-seal" id="pocketSeal">☾</div>
+            </div>
+          </div>
+          <p class="pocket-label" id="pocketLabel">tap envelope to open 💌</p>
+        </div>
+
+        <!-- Editorial Journal Note -->
+        <div class="journal-parchment" data-stagger="right">
+          <div class="parchment-tape"></div>
+          <span class="journal-date">NOVEMBER 9TH • A SPECIAL RECORD</span>
+          <p class="journal-quote">
+            "It is funny how a whole year can pass by, yet all the best days remain completely frozen in time with you."
+          </p>
+          <p class="journal-body">
+            If I could keep a little wooden box filled with everything from this year, it would be packed with silly
+            laughs, late-night car rides, blurry candid photos, and every single time you smiled at me.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= 3. KODAK PORTRA 400 35MM FILM STRIP ================= -->
+    <section class="story-section" data-reveal="slide-up">
+      <div class="film-negative-casing">
+
+        <div class="film-bar">
+          <div class="film-brand">
+            <span class="film-ribbon">🎀</span>
+            <strong>KODAK PORTRA 400</strong>
+            <span class="film-meta">120 • 35MM COLOR FILM</span>
+          </div>
+          <span class="film-iso">ISO 400 / 27°</span>
+        </div>
+
+        <!-- 35mm Frame Strip with Sprockets -->
+        <div class="film-negative-track">
+          <div class="negative-frame" data-stagger="item">
+            <img src="./images/img1.jpeg" alt="Frame 1"/>
+            <span class="frame-stamp">01 • A</span>
+          </div>
+          <div class="negative-frame" data-stagger="item">
+            <img src="./images/img3.jpeg" alt="Frame 2" />
+            <span class="frame-stamp">02 • A</span>
+          </div>
+          <div class="negative-frame" data-stagger="item">
+            <img src="./images/img4.jpeg" alt="Frame 3" />
+            <span class="frame-stamp">03 • A</span>
+          </div>
+          <div class="negative-frame" data-stagger="item">
+            <img src="./images/img7.jpeg" alt="Frame 4"/>
+            <span class="frame-stamp">04 • A</span>
+          </div>
+          <div class="negative-frame" data-stagger="item">
+            <img src="./images/img8.jpeg" alt="Frame 5" />
+            <span class="frame-stamp">05 • A</span>
+          </div>
+          <div class="negative-frame" data-stagger="item">
+            <img src="./images/img2.jpeg" alt="Frame 5" />
+            <span class="frame-stamp">05 • A</span>
+          </div>
+          <div class="negative-frame" data-stagger="item">
+            <img src="./images/img9.jpeg" alt="Frame 5" />
+            <span class="frame-stamp">05 • A</span>
+          </div>
+          <div class="negative-frame" data-stagger="item">
+            <img src="./images/img6.jpeg" alt="Frame 5" />
+            <span class="frame-stamp">05 • A</span>
+          </div>
+        </div>
+
+        <p class="film-caption">← swipe / drag horizontally to view our film roll →</p>
+      </div>
+    </section>
+
+    <!-- ================= 4. THREE PROMISES CARDS ================= -->
+    <section class="story-section" data-reveal="fade-up">
+      <div class="promises-showcase">
+        <h3 class="promises-headline">Three Promises For Today & Always</h3>
+
+        <div class="promises-row">
+          <div class="promise-tile" data-stagger="item">
+            <div class="tile-icon">🕊️</div>
+            <h4>Your Safe Haven</h4>
+            <p>On tough days, busy weeks, or whenever you feel tired, you'll always have a place where you can exhale
+              and just be yourself.</p>
+          </div>
+
+          <div class="promise-tile center-gold-tile" data-stagger="item">
+            <div class="tile-icon">🌙</div>
+            <h4>Choosing You Forever</h4>
+            <p>Not just when things are smooth and easy, but through every single chapter. I choose you for every one of
+              our tomorrows.</p>
+          </div>
+
+          <div class="promise-tile" data-stagger="item">
+            <div class="tile-icon">🍰</div>
+            <h4>Every Birthday Together</h4>
+            <p>To celebrate you, cheer for you, and stand beside you for every single wish and candle you blow out for
+              the rest of our lives.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 5. SERRATED STAMP NOTE & CASSETTE ================= -->
+    <section class="story-section" data-reveal="stamp-plunge">
+      <div class="scalloped-stamp-card">
+        <div class="stamp-border-wrapper">
+          <div class="stamp-content">
+            <div class="stamp-tagline">🧸 CHAPTER OF US • SIDE A 💌</div>
+
+            <p class="stamp-verse">
+              "And just like that, another beautiful year becomes a cherished memory. I hope today reminds you how
+              deeply, quietly, and entirely loved you are."
+            </p>
+
+            <!-- Smoked Glass Retro Cassette Player -->
+            <div class="acrylic-cassette" id="cassettePlayer" onclick="toggleMelody()">
+              <div class="cassette-top">
+                <span class="cas-label">SIDE A • STEREO</span>
+                <!-- Updated Song Title -->
+                <span class="cas-title">The Turtles - Happy Together 🎵</span>
+              </div>
+
+              <div class="tape-viewport">
+                <div class="tape-wheel wheel-1"></div>
+                <div class="equalizer-bars">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="tape-wheel wheel-2"></div>
+              </div>
+
+              <div class="cassette-bottom">
+                <span class="screw s-l"></span>
+                <p class="cas-cta" id="tapePrompt">tap to play Happy Together 🤍</p>
+                <span class="screw s-r"></span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 6. INTERACTIVE CAKE & WISH REVEAL ================= -->
+    <section class="story-section" data-reveal="zoom-in">
+      <div class="cake-ceremony">
+        <span class="ceremony-pill">A BIRTHDAY CEREMONY</span>
+        <h3 class="ceremony-title">Make A Wish Before Midnight</h3>
+        <p class="ceremony-hint">Tap the flame to blow out your birthday candle ♡</p>
+
+        <!-- Pastel French Bakery Cake -->
+        <div class="artisan-cake" id="artisanCake" onclick="extinguishCandle()">
+          <div class="candle-stem">
+            <div class="candle-flame" id="flameGlow"></div>
+            <div class="candle-smoke" id="flameSmoke"></div>
+          </div>
+          <div class="cake-layer layer-upper">
+            <div class="glaze-drip"></div>
+          </div>
+          <div class="cake-layer layer-lower">
+            <div class="glaze-drip"></div>
+          </div>
+          <div class="porcelain-pedestal"></div>
+        </div>
+
+        <!-- Secret Card Unveiled After Blowing Candle -->
+        <!-- Secret Card Unveiled After Blowing Candle -->
+        <div class="secret-promise-card" id="secretPromise">
+          <div class="gold-seal-crest">✨</div>
+          <h4>2026 gave me my Evangelin Lydia</h4>
+          <p>
+            Happy 1st birthday together, my dearest Lidi. Loving you was the easiest choice of 2026, and loving you
+            forever is the only promise I'll ever need to make.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EDITORIAL FOOTER ================= -->
+    <footer class="editorial-footer" data-reveal="fade-up">
+      <div class="footer-divider"></div>
+      <p class="footer-quote">"In every lifetime, I would still look for you."</p>
+      <a href="index.html" class="revisit-button">↺ Replay From The Beginning</a>
+    </footer>
+
+  </div>
+
+  <!-- Hidden Audio Player -->
+  <audio id="birthdaySong" src="song.mp3" preload="auto"></audio>
+
+  <script src="page2.js"></script>
+</body>
+
+</html>

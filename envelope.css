@@ -1,0 +1,221 @@
+/* Envelope Wrapper */
+.envelope-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 150px;
+  margin-bottom: 80px;
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  z-index: 3;
+}
+
+.envelope {
+  position: relative;
+  width: clamp(290px, 30vw, 370px);
+  height: clamp(195px, 20vw, 245px);
+  background: var(--envelope-shade);
+  border-radius: 6px 6px 12px 12px;
+  perspective: 1200px;
+  /* Soft pinkish-peach shadow cast against twilight sky */
+  box-shadow: 
+    0 24px 50px rgba(19, 24, 38, 0.45),
+    0 10px 22px rgba(190, 24, 93, 0.18);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+}
+
+.envelope-container:hover .envelope {
+  transform: translateY(-6px);
+  box-shadow: 
+    0 32px 60px rgba(19, 24, 38, 0.55),
+    0 14px 28px rgba(190, 24, 93, 0.25);
+}
+
+/* Top 3D Flap */
+.flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: calc(clamp(290px, 30vw, 370px) / 2) solid transparent;
+  border-right: calc(clamp(290px, 30vw, 370px) / 2) solid transparent;
+  border-top: calc(clamp(195px, 20vw, 245px) * 0.6) solid #ede0d4;
+  transform-origin: top;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 5;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
+}
+
+/* Pocket Layers */
+.pocket-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: calc(clamp(290px, 30vw, 370px) / 2) solid transparent;
+  border-right: calc(clamp(290px, 30vw, 370px) / 2) solid transparent;
+  border-bottom: calc(clamp(195px, 20vw, 245px) * 0.58) solid var(--envelope-base);
+  border-radius: 0 0 10px 10px;
+  z-index: 4;
+}
+
+.pocket-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-top: calc(clamp(195px, 20vw, 245px) / 2) solid transparent;
+  border-bottom: calc(clamp(195px, 20vw, 245px) / 2) solid transparent;
+  border-left: calc(clamp(290px, 30vw, 370px) * 0.54) solid #f7ece2;
+  z-index: 3;
+}
+
+.pocket-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: calc(clamp(195px, 20vw, 245px) / 2) solid transparent;
+  border-bottom: calc(clamp(195px, 20vw, 245px) / 2) solid transparent;
+  border-right: calc(clamp(290px, 30vw, 370px) * 0.54) solid #f0e3d7;
+  z-index: 3;
+}
+
+/* Deep Magenta Wax Seal with Crescent Moon Emblem[cite: 8] */
+.wax-seal {
+  position: absolute;
+  top: calc(clamp(195px, 20vw, 245px) * 0.44);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 52px;
+  height: 52px;
+  background: radial-gradient(circle at 35% 35%, #e11d48, var(--blossom-magenta) 60%, var(--blossom-deep) 100%);
+  border-radius: 50%;
+  box-shadow: 
+    0 8px 18px rgba(131, 24, 67, 0.4),
+    inset 0 2px 3px rgba(255, 255, 255, 0.5),
+    inset 0 -3px 5px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 6;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.seal-inner {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px dashed rgba(254, 215, 170, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seal-icon {
+  font-size: 17px;
+  color: #ffedd5;
+  line-height: 1;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Clean Letter Card Inside */
+.letter {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 88%;
+  background: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  z-index: 2;
+  transition: transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) 0.35s;
+}
+
+.letter-border {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(190, 24, 93, 0.2);
+  background: radial-gradient(circle at center, #ffffff 60%, #fffbf8 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  text-align: center;
+}
+
+.letter-subtitle {
+  font-size: 9px;
+  letter-spacing: 2.4px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  font-weight: 400;
+}
+
+.letter-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 2vw, 1.75rem);
+  color: var(--blossom-deep);
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.letter-divider {
+  width: 30px;
+  height: 1px;
+  background: rgba(190, 24, 93, 0.3);
+  margin: 8px 0;
+}
+
+.letter-date {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+/* Call to Action Hint */
+.tap-hint {
+  margin-top: 18px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 16px;
+  color: #fff2e8;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  letter-spacing: 1.2px;
+  transition: opacity 0.3s ease;
+  animation: hintPulse 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes hintPulse {
+  0% { opacity: 0.55; transform: translateY(0); }
+  100% { opacity: 0.95; transform: translateY(3px); }
+}
+
+/* Envelope Open State */
+.envelope.is-open .flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope.is-open .wax-seal {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.6);
+}
+
+.envelope.is-open .letter {
+  transform: translate(-50%, -110px);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.35);
+}

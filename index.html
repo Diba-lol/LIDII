@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Browser Tab Title -->
+  <title>Happy Birthday, Lidi ♡ | Open Me</title>
+
+  <!-- Editorial Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Anton&family=Gabarito:wght@400..900&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Lovers+Quarrel&family=Outfit:wght@100..900&family=Playwrite+IT+Trad:wght@100..400&family=Poppins&family=Prata&family=Share+Tech&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="base.css" />
+  <link rel="stylesheet" href="envelope.css" />
+  <link rel="stylesheet" href="props.css" />
+  <link rel="stylesheet" href="responsive.css" />
+</head>
+
+<body>
+
+  <!-- Floating Starlight Sparkles -->
+  <div class="sparkles-container">
+    <span class="sparkle s1">✦</span>
+    <span class="sparkle s2">✧</span>
+    <span class="sparkle s3">✦</span>
+    <span class="sparkle s4">✧</span>
+  </div>
+
+  <main class="scene">
+    <!-- Top Quote -->
+    <header class="scene-header">
+      <h1 class="header-quote">Open this to find my forever person<span>💖</span></h1>
+    </header>
+
+    <!-- Side-by-Side Composition -->
+    <section class="stage">
+
+      <!-- Envelope Container -->
+      <div class="envelope-container" onclick="openEnvelope()">
+
+        <!-- 1. Vintage Camera Sticker in the Upper-Left Sky -->
+        <img src="./images/camera.png" alt="Vintage Camera" class="camera-sticker" />
+
+        <!-- 2. Cat Sticker on the Envelope -->
+        <img src="./images/cat.png" alt="Birthday Cat" class="cat-sticker" />
+
+        <div class="envelope" id="envelope">
+          <div class="flap"></div>
+
+          <div class="wax-seal" id="waxSeal">
+            <div class="seal-inner">
+              <span class="seal-icon">☾</span>
+            </div>
+          </div>
+
+          <!-- Inside Letter Card -->
+          <div class="letter" id="letter">
+            <div class="letter-border">
+              <span class="letter-subtitle">FOR MY EVANGELIN LYDIA</span>
+              <h2 class="letter-title">Happy Birthday, Lidi</h2>
+              <div class="letter-divider"></div>
+              <p class="letter-date">November 9, 2026</p>
+            </div>
+          </div>
+
+          <div class="pocket-left"></div>
+          <div class="pocket-right"></div>
+          <div class="pocket-bottom"></div>
+        </div>
+
+        <p class="tap-hint">click to open</p>
+      </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
+
+</html>

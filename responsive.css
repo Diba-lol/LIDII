@@ -1,0 +1,169 @@
+/* responsive.css
+   Load this LAST (after props.css). It only overrides the fixed-pixel
+   layout so the page fits phones and tablets. Your other files stay as they are. */
+
+/* ---------- all screens ---------- */
+/* body had overflow:hidden, which cut content off on small screens */
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+@supports (min-height: 100svh) {
+  body {
+    min-height: 100svh;
+  }
+}
+
+.envelope-container {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---------- tablet / small laptop (up to 1024px) ---------- */
+@media (max-width: 1024px) {
+  .scene {
+    transform: translate(0, -10px);
+  }
+
+  .scene-header {
+    margin-left: 0;
+  }
+
+  .header-quote {
+    width: min(500px, 90vw);
+  }
+
+  .envelope-container {
+    margin-left: 0;
+    margin-bottom: 50px;
+  }
+
+  .camera-sticker {
+    left: -215px;
+    top: -45px;
+    width: 230px;
+  }
+
+  .cat-sticker {
+    left: -110px;
+    bottom: -60px;
+    width: 190px;
+  }
+}
+
+/* ---------- phone (up to 768px) ---------- */
+@media (max-width: 768px) {
+
+  /* iOS ignores background-attachment: fixed and zooms the image */
+  body {
+    background-attachment: scroll;
+    background-position: center top;
+  }
+
+  .scene {
+    padding: 16px;
+    transform: none;
+  }
+
+  .scene-header {
+    margin-bottom: 110px;
+  }
+
+  /* room for the camera sticker */
+  .header-quote {
+    width: 100%;
+    font-size: clamp(1.15rem, 5.2vw, 1.5rem);
+    line-height: 1.5;
+  }
+
+  .stage {
+    gap: 0;
+  }
+
+  .envelope-container {
+    margin-bottom: 24px;
+  }
+
+  .camera-sticker {
+    top: -92px;
+    left: -12px;
+    width: 120px;
+  }
+
+  .cat-sticker {
+    left: -40px;
+    bottom: -12px;
+    width: 115px;
+  }
+}
+
+/* ---------- very small phones (up to 340px) ---------- */
+/* the envelope parts were all sized from a 290px minimum, so shrink them together */
+@media (max-width: 340px) {
+  .envelope {
+    width: 260px;
+    height: 174px;
+  }
+
+  .flap {
+    border-left-width: 130px;
+    border-right-width: 130px;
+    border-top-width: 104px;
+  }
+
+  .pocket-bottom {
+    border-left-width: 130px;
+    border-right-width: 130px;
+    border-bottom-width: 101px;
+  }
+
+  .pocket-left {
+    border-top-width: 87px;
+    border-bottom-width: 87px;
+    border-left-width: 140px;
+  }
+
+  .pocket-right {
+    border-top-width: 87px;
+    border-bottom-width: 87px;
+    border-right-width: 140px;
+  }
+
+  .wax-seal {
+    top: 77px;
+  }
+
+  .envelope.is-open .letter {
+    transform: translate(-50%, -90px);
+  }
+
+  .camera-sticker {
+    width: 100px;
+    left: -6px;
+  }
+
+  .cat-sticker {
+    width: 95px;
+    left: -30px;
+  }
+}
+
+/* ---------- phones turned sideways (short screens) ---------- */
+@media (max-height: 520px) and (orientation: landscape) {
+  .scene-header {
+    margin-bottom: 44px;
+  }
+
+  .header-quote {
+    font-size: 1.2rem;
+  }
+
+  .envelope-container {
+    margin-bottom: 0;
+  }
+
+  .camera-sticker {
+    top: -40px;
+  }
+}

@@ -1,0 +1,1191 @@
+/* ================= GLOBAL SCROLL & COLOR SYSTEM ================= */
+:root {
+  --gold-foil: #d4af37;
+  --gold-shimmer: linear-gradient(135deg, #fce09b 0%, #d4af37 50%, #aa8214 100%);
+  --paper-cream: #fefcf9;
+  --paper-linen: #f9f5ef;
+  --rose-velvet: #be185d;
+  --rose-deep: #831843;
+  --text-primary: #2d1820;
+  --text-secondary: #6b535d;
+  --font-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --font-sans: 'Montserrat', sans-serif;
+}
+
+body.scrollable-page {
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  height: auto;
+  min-height: 100vh;
+  display: block;
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+}
+
+/* ================= ULTRA-THIN GOLD PROGRESS LINE ================= */
+.progress-track {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.12);
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--gold-shimmer);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.9);
+  transition: width 0.08s ease-out;
+}
+
+/* Page Frame */
+.editorial-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 80px 24px 140px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ================= SCROLL PHYSICS ANIMATIONS ================= */
+[data-reveal] {
+  opacity: 0;
+  transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+[data-reveal="fade-up"] {
+  transform: translateY(60px);
+}
+
+[data-reveal="zoom-in"] {
+  transform: translateY(50px) scale(0.93);
+}
+
+[data-reveal="slide-up"] {
+  transform: translateY(45px);
+}
+
+[data-reveal="stamp-plunge"] {
+  transform: translateY(70px) scale(0.95);
+}
+
+[data-reveal].in-view {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Staggered Children */
+[data-stagger] {
+  opacity: 0;
+  transition: all 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-stagger="left"] {
+  transform: translateX(-40px);
+}
+
+[data-stagger="right"] {
+  transform: translateX(40px);
+}
+
+[data-stagger="item"] {
+  transform: translateY(35px);
+}
+
+.in-view [data-stagger] {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.in-view [data-stagger="item"]:nth-child(1) {
+  transition-delay: 0.12s;
+}
+
+.in-view [data-stagger="item"]:nth-child(2) {
+  transition-delay: 0.24s;
+}
+
+.in-view [data-stagger="item"]:nth-child(3) {
+  transition-delay: 0.36s;
+}
+
+.in-view [data-stagger="item"]:nth-child(4) {
+  transition-delay: 0.48s;
+}
+
+.in-view [data-stagger="item"]:nth-child(5) {
+  transition-delay: 0.60s;
+}
+
+.story-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 125px;
+}
+
+/* ================= EDITORIAL HEADER ================= */
+.editorial-header {
+  text-align: center;
+  margin-bottom: 90px;
+}
+
+.chapter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.chapter-rule {
+  width: 32px;
+  height: 1px;
+  background: var(--gold-foil);
+  opacity: 0.7;
+}
+
+.chapter-name {
+  font-size: 10.5px;
+  letter-spacing: 3.5px;
+  color: #fff4e0;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+  font-weight: 500;
+}
+
+.editorial-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.3rem, 4.4vw, 3.5rem);
+  font-weight: 400;
+  color: #ffffff;
+  text-shadow: 0 4px 20px rgba(15, 23, 42, 0.9);
+  line-height: 1.18;
+  max-width: 780px;
+  margin: 0 auto 20px auto;
+}
+
+.scroll-prompt {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 14.5px;
+  color: rgba(255, 245, 245, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.scroll-mouse {
+  width: 19px;
+  height: 30px;
+  border: 1.5px solid rgba(255, 255, 255, 0.65);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  padding-top: 4px;
+}
+
+.mouse-dot {
+  width: 3px;
+  height: 6px;
+  background: var(--gold-foil);
+  border-radius: 2px;
+  animation: mouseDrift 1.7s infinite;
+}
+
+@keyframes mouseDrift {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(11px);
+    opacity: 0;
+  }
+}
+
+/* ================= 1. THE OPEN SCRAPBOOK ================= */
+.binder-book {
+  display: flex;
+  width: 100%;
+  max-width: 860px;
+  min-height: 490px;
+  background: var(--paper-cream);
+  border-radius: 16px;
+  box-shadow:
+    0 35px 80px rgba(15, 23, 42, 0.5),
+    0 10px 25px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  position: relative;
+}
+
+.leaf {
+  flex: 1;
+  padding: clamp(26px, 4vw, 44px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--paper-cream);
+}
+
+.leaf-left {
+  border-radius: 16px 0 0 16px;
+  border-right: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.leaf-right {
+  border-radius: 0 16px 16px 0;
+  border-left: 1px solid rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.milestone-badge {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.milestone-num {
+  font-family: var(--font-serif);
+  font-size: 3.4rem;
+  font-weight: 600;
+  background: var(--gold-shimmer);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+}
+
+.milestone-sparkle {
+  font-size: 26px;
+}
+
+.leaf-greeting {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.gold-accent-line {
+  width: 40px;
+  height: 2px;
+  background: var(--gold-shimmer);
+  margin-bottom: 16px;
+}
+
+.leaf-prose {
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+  font-weight: 300;
+}
+
+.leaf-sign {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--rose-velvet);
+  margin-top: 6px;
+}
+
+/* Metallic Rings Spine */
+.metallic-spine {
+  width: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background: linear-gradient(to right, #e8dfd5, #d8cbbf, #e8dfd5);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 5;
+}
+
+.ring-socket {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 22px;
+}
+
+.punch-hole {
+  width: 9px;
+  height: 9px;
+  background: #231610;
+  border-radius: 50%;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.titanium-ring {
+  position: absolute;
+  width: 44px;
+  height: 13px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 35%, #94a3b8 70%, #475569 100%);
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.35);
+}
+
+/* Striped Backing on Right Page */
+.stripes-canvas {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 140px;
+  height: 90%;
+  background: repeating-linear-gradient(-45deg, #fce7f3, #fce7f3 10px, #fff8fa 10px, #fff8fa 20px);
+  opacity: 0.65;
+  border-radius: 10px;
+}
+
+.polaroid-assembly {
+  position: relative;
+  z-index: 3;
+}
+
+/* Serrated Semi-Transparent Washi Tape */
+.serrated-washi {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 82px;
+  height: 24px;
+  background: rgba(244, 114, 182, 0.6);
+  backdrop-filter: blur(3px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  z-index: 5;
+}
+
+.polaroid-frame {
+  margin: 0;
+  background: #ffffff;
+  padding: 12px 12px 22px 12px;
+  border-radius: 3px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+  transform: rotate(3deg);
+  text-align: center;
+  transition: transform 0.4s ease;
+}
+
+.polaroid-frame:hover {
+  transform: rotate(1deg) scale(1.03);
+}
+
+.polaroid-photo {
+  width: 210px;
+  height: 235px;
+  object-fit: cover;
+  display: block;
+}
+
+.polaroid-legend {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 13.5px;
+  color: #666;
+  margin-top: 12px;
+}
+
+.scrap-sticker {
+  position: absolute;
+  z-index: 4;
+}
+
+.stamp-heart {
+  top: 38px;
+  left: 30px;
+  font-size: 24px;
+  color: var(--rose-velvet);
+  transform: rotate(-14deg);
+}
+
+.stamp-star {
+  bottom: 42px;
+  right: 26px;
+  font-size: 26px;
+}
+
+.cursive-whisper {
+  position: absolute;
+  bottom: 26px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--rose-velvet);
+  font-size: 15px;
+}
+
+/* ================= 2. KEEPSAKE SPREAD (STAGGERED POP-UP SEQUENCE) ================= */
+.keepsake-grid {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  width: 100%;
+  max-width: 860px;
+}
+
+.vellum-pocket-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.vellum-envelope {
+  position: relative;
+  width: 270px;
+  height: 195px;
+  background: #ecdcc9;
+  border-radius: 8px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.38);
+  perspective: 1000px;
+  transition: transform 0.3s ease;
+}
+
+.vellum-pocket-card:hover .vellum-envelope {
+  transform: translateY(-4px);
+}
+
+/* Opaque interior base */
+.envelope-interior {
+  position: absolute;
+  inset: 0;
+  background: #fbf6f0;
+  border-radius: 8px;
+  z-index: 1;
+}
+
+/* Envelope Flap: On closing, wait 0.35s for the photo to slide inside first */
+.vellum-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 135px solid transparent;
+  border-right: 135px solid transparent;
+  border-top: 92px solid #e2cfbd;
+  transform-origin: top;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.35s, z-index 0.1s 0.35s;
+  z-index: 5;
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.12));
+}
+
+/* Front Pocket Fold */
+.vellum-pocket-front {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 135px solid #f6ede3;
+  border-right: 135px solid #f6ede3;
+  border-bottom: 105px solid #ebd9c8;
+  border-radius: 0 0 8px 8px;
+  z-index: 4;
+}
+
+/* Wax Seal */
+.mini-wax-seal {
+  position: absolute;
+  bottom: -38px;
+  left: -16px;
+  width: 32px;
+  height: 32px;
+  background: radial-gradient(circle at 35% 35%, #e11d48, var(--rose-velvet) 65%, var(--rose-deep) 100%);
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 6;
+  transition: opacity 0.3s ease 0.35s, transform 0.3s ease 0.35s;
+}
+
+/* Photo Snapshot: On closing, retreat immediately (0s delay) */
+.tucked-snapshot {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 155px;
+  background: #ffffff;
+  padding: 8px 8px 24px 8px;
+  border-radius: 4px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0s, z-index 0.1s 0.4s;
+  text-align: center;
+}
+
+.tucked-snapshot img {
+  width: 100%;
+  height: 125px;
+  object-fit: cover;
+  border-radius: 2px;
+  display: block;
+}
+
+.snapshot-note {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 13px;
+  color: #777;
+  display: block;
+  margin-top: 5px;
+}
+
+.pocket-label {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: #fff;
+  font-size: 14.5px;
+  margin-top: 14px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  transition: opacity 0.3s ease;
+}
+
+/* ================= OPENING ORCHESTRATION ================= */
+
+/* Stage 1: Flap swings open immediately (0s delay) */
+.vellum-envelope.is-open .vellum-flap {
+  transform: rotateX(180deg);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  z-index: 1;
+}
+
+/* Wax seal fades out immediately */
+.vellum-envelope.is-open .mini-wax-seal {
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 0.2s ease 0s, transform 0.2s ease 0s;
+}
+
+/* Stage 2: Photo waits for flap to complete, then ascends with an elastic pop (0.45s delay) */
+.vellum-envelope.is-open .tucked-snapshot {
+  transform: translateX(-50%) translateY(-95px) rotate(-2deg);
+  z-index: 10;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+  transition: transform 0.65s cubic-bezier(0.18, 0.89, 0.32, 1.25) 0.45s;
+}
+
+
+
+/* ================= 3. KODAK PORTRA 400 FILM STRIP ================= */
+.film-negative-casing {
+  width: 100%;
+  max-width: 860px;
+  background: #111114;
+  padding: 26px 22px;
+  border-radius: 14px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+  border-top: 9px dashed #3f3f46;
+  border-bottom: 9px dashed #3f3f46;
+}
+
+.film-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 0 10px;
+  color: #fbbf24;
+  font-size: 11px;
+  letter-spacing: 3px;
+}
+
+.film-ribbon {
+  margin-right: 8px;
+}
+
+.film-meta {
+  color: rgba(255, 255, 255, 0.5);
+  margin-left: 10px;
+  font-weight: 400;
+}
+
+.film-iso {
+  color: #fde047;
+  font-weight: 500;
+}
+
+.film-negative-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 14px;
+  scrollbar-width: thin;
+  scroll-snap-type: x mandatory;
+}
+
+.negative-frame {
+  position: relative;
+  flex: 0 0 185px;
+  height: 235px;
+  background: #000;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 3px solid #27272a;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+  transition: transform 0.35s ease;
+  scroll-snap-align: start;
+}
+
+.negative-frame:hover {
+  transform: translateY(-8px) scale(1.04);
+}
+
+.negative-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.frame-stamp {
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 1.5px;
+}
+
+.film-caption {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+  margin-top: 12px;
+}
+
+/* ================= 4. THREE PROMISES CARDS ================= */
+.promises-showcase {
+  width: 100%;
+  max-width: 860px;
+  text-align: center;
+}
+
+.promises-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+  font-weight: 400;
+  color: #fff;
+  text-shadow: 0 4px 16px rgba(15, 23, 42, 0.85);
+  margin-bottom: 34px;
+}
+
+.promises-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.promise-tile {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  padding: 32px 22px;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  text-align: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.promise-tile:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 50px rgba(15, 23, 42, 0.45);
+}
+
+.center-gold-tile {
+  background: #ffffff;
+  border: 1.5px solid rgba(212, 175, 55, 0.5);
+  transform: translateY(-6px);
+}
+
+.tile-icon {
+  font-size: 28px;
+  margin-bottom: 14px;
+}
+
+.promise-tile h4 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.promise-tile p {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+/* ================= 5. SERRATED STAMP NOTE & CASSETTE ================= */
+.scalloped-stamp-card {
+  width: 100%;
+  max-width: 720px;
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 18px;
+  box-shadow: 0 30px 70px rgba(15, 23, 42, 0.5);
+}
+
+.stamp-border-wrapper {
+  border: 2px dashed rgba(190, 24, 93, 0.35);
+  border-radius: 12px;
+  padding: 40px 30px;
+  text-align: center;
+  background: #fffdfc;
+}
+
+.stamp-tagline {
+  font-size: 11px;
+  letter-spacing: 3.5px;
+  color: var(--rose-velvet);
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.stamp-verse {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+  font-style: italic;
+  line-height: 1.65;
+  color: var(--text-primary);
+  margin-bottom: 34px;
+}
+
+/* Luxury Smoked Acrylic Cassette */
+.acrylic-cassette {
+  width: 270px;
+  margin: 0 auto;
+  background: #231b20;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.acrylic-cassette:hover {
+  transform: scale(1.03);
+}
+
+.cassette-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #ffd8a8;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.tape-viewport {
+  background: #111;
+  border-radius: 6px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tape-wheel {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 4px dashed #666;
+}
+
+.equalizer-bars {
+  display: flex;
+  gap: 3.5px;
+  align-items: flex-end;
+  height: 20px;
+}
+
+.equalizer-bars span {
+  width: 4px;
+  height: 6px;
+  background: var(--gold-shimmer);
+  border-radius: 2px;
+}
+
+.spinning .tape-wheel {
+  animation: spinWheel 1.6s linear infinite;
+}
+
+.spinning .equalizer-bars span {
+  animation: danceEqualizer 0.5s ease infinite alternate;
+}
+
+.spinning .equalizer-bars span:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.spinning .equalizer-bars span:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.spinning .equalizer-bars span:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.spinning .equalizer-bars span:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+@keyframes spinWheel {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes danceEqualizer {
+  0% {
+    height: 4px;
+  }
+
+  100% {
+    height: 20px;
+  }
+}
+
+.cassette-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.screw {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #666;
+}
+
+.cas-cta {
+  font-size: 11.5px;
+  color: #fce7f3;
+}
+
+/* ================= 6. CAKE CEREMONY (CLICKABLE) ================= */
+.cake-ceremony {
+  width: 100%;
+  max-width: 640px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 44px 28px;
+  border-radius: 22px;
+  box-shadow: 0 30px 70px rgba(15, 23, 42, 0.5);
+}
+
+.ceremony-pill {
+  font-size: 10px;
+  letter-spacing: 3.5px;
+  color: #fff;
+  background: var(--rose-velvet);
+  padding: 5px 14px;
+  border-radius: 20px;
+}
+
+.ceremony-title {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  color: #ffffff;
+  margin-top: 16px;
+}
+
+.ceremony-hint {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 14.5px;
+  color: #fed7aa;
+  margin-bottom: 28px;
+  transition: color 0.3s ease;
+}
+
+.artisan-cake {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  margin: 0 auto;
+  width: 210px;
+  padding: 10px;
+  border-radius: 12px;
+  transition: transform 0.25s ease;
+}
+
+.artisan-cake:hover {
+  transform: scale(1.04);
+}
+
+.candle-stem {
+  position: relative;
+  width: 8px;
+  height: 38px;
+  background: repeating-linear-gradient(45deg, #ffffff, #ffffff 4px, #f43f5e 4px, #f43f5e 8px);
+  border-radius: 3px;
+  margin-bottom: -2px;
+}
+
+.candle-flame {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 22px;
+  background: radial-gradient(circle at 50% 80%, #ffffff 0%, #fde047 40%, #ea580c 100%);
+  border-radius: 50% 50% 20% 20%;
+  box-shadow: 0 0 20px #fde047, 0 0 35px rgba(234, 88, 12, 0.6);
+  animation: flickerFlame 1.3s infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes flickerFlame {
+  0% {
+    transform: translateX(-50%) scale(0.95) rotate(-2deg);
+  }
+
+  100% {
+    transform: translateX(-50%) scale(1.15) rotate(2deg);
+  }
+}
+
+.candle-smoke {
+  position: absolute;
+  top: -26px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.artisan-cake.extinguished .candle-flame {
+  display: none;
+}
+
+.artisan-cake.extinguished .candle-smoke {
+  animation: smokeVanish 1.3s ease-out forwards;
+}
+
+@keyframes smokeVanish {
+  0% {
+    opacity: 0.85;
+    transform: translate(-50%, 0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -35px) scale(3.2);
+    filter: blur(5px);
+  }
+}
+
+.cake-layer {
+  position: relative;
+  background: #fbcfe8;
+  border-radius: 6px;
+  border: 2px solid #ffffff;
+}
+
+.layer-upper {
+  width: 115px;
+  height: 38px;
+  background: #fdf2f8;
+}
+
+.layer-lower {
+  width: 170px;
+  height: 48px;
+  background: #f472b6;
+}
+
+.glaze-drip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: #ffffff;
+  border-radius: 0 0 6px 6px;
+}
+
+.porcelain-pedestal {
+  width: 200px;
+  height: 9px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+  margin-top: 2px;
+}
+
+/* Secret Promise Card */
+.secret-promise-card {
+  display: none;
+  margin-top: 30px;
+  background: #ffffff;
+  padding: 26px;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  animation: cardBloom 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.gold-seal-crest {
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.secret-promise-card h4 {
+  font-family: var(--font-serif);
+  color: var(--rose-velvet);
+  font-size: 1.45rem;
+  margin-bottom: 8px;
+}
+
+.secret-promise-card p {
+  font-size: 14.5px;
+  color: var(--text-primary);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+@keyframes cardBloom {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ================= EDITORIAL FOOTER ================= */
+.editorial-footer {
+  text-align: center;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-divider {
+  width: 60px;
+  height: 1px;
+  background: var(--gold-foil);
+  margin-bottom: 24px;
+  opacity: 0.6;
+}
+
+.footer-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 18px;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  margin-bottom: 26px;
+}
+
+.revisit-button {
+  display: inline-block;
+  padding: 13px 32px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: rgba(19, 24, 38, 0.5);
+  backdrop-filter: blur(8px);
+  border-radius: 30px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.revisit-button:hover {
+  background: #ffffff;
+  color: var(--rose-velvet);
+  border-color: #ffffff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .binder-book {
+    flex-direction: column;
+  }
+
+  .metallic-spine {
+    width: 100%;
+    height: 18px;
+    flex-direction: row;
+  }
+
+  .ring-socket {
+    width: 16%;
+    height: 100%;
+  }
+
+  .titanium-ring {
+    width: 13px;
+    height: 32px;
+  }
+
+  .leaf-left {
+    border-radius: 16px 16px 0 0;
+    border-right: none;
+  }
+
+  .leaf-right {
+    border-radius: 0 0 16px 16px;
+    border-left: none;
+    padding: 35px 20px;
+  }
+
+  .keepsake-grid {
+    flex-direction: column;
+  }
+
+  .promises-row {
+    grid-template-columns: 1fr;
+  }
+
+  .negative-frame {
+    flex: 0 0 150px;
+    height: 190px;
+  }
+}
