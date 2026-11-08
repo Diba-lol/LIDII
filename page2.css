@@ -432,15 +432,7 @@ body.scrollable-page {
   font-size: 15px;
 }
 
-/* ================= 2. KEEPSAKE SPREAD (STAGGERED POP-UP SEQUENCE) ================= */
-.keepsake-grid {
-  display: flex;
-  align-items: center;
-  gap: 36px;
-  width: 100%;
-  max-width: 860px;
-}
-
+/* ================= BULLETPROOF KEEPSAKE ENVELOPE ================= */
 .vellum-pocket-card {
   flex: 1;
   display: flex;
@@ -448,16 +440,20 @@ body.scrollable-page {
   align-items: center;
   cursor: pointer;
   user-select: none;
+  min-width: 280px;
 }
 
+/* Master Envelope Body */
 .vellum-envelope {
   position: relative;
-  width: 270px;
-  height: 195px;
-  background: #ecdcc9;
+  width: 280px;
+  height: 185px;
+  background: #fdfaf6;
   border-radius: 8px;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.38);
-  perspective: 1000px;
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.15);
+  perspective: 1200px;
   transition: transform 0.3s ease;
 }
 
@@ -465,132 +461,273 @@ body.scrollable-page {
   transform: translateY(-4px);
 }
 
-/* Opaque interior base */
-.envelope-interior {
+/* Interior Lining */
+.env-interior {
   position: absolute;
   inset: 0;
-  background: #fbf6f0;
+  background: #f7ede2;
   border-radius: 8px;
   z-index: 1;
 }
 
-/* Envelope Flap: On closing, wait 0.35s for the photo to slide inside first */
-.vellum-flap {
+/* --- Tucked Photo --- */
+.tucked-snapshot {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 0;
-  border-left: 135px solid transparent;
-  border-right: 135px solid transparent;
-  border-top: 92px solid #e2cfbd;
-  transform-origin: top;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.35s, z-index 0.1s 0.35s;
-  z-index: 5;
-  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.12));
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  width: 195px;
+  height: 145px;
+  background: #ffffff;
+  padding: 6px 6px 18px 6px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+  text-align: center;
+  box-sizing: border-box;
+  /* When closing: drops inside first */
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+    box-shadow 0.4s ease 0s;
 }
 
-/* Front Pocket Fold */
-.vellum-pocket-front {
+.tucked-snapshot img {
+  width: 100%;
+  height: 112px;
+  object-fit: contain;
+  border-radius: 2px;
+  display: block;
+}
+
+.snapshot-note {
+  font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
+  font-style: italic;
+  font-size: 12px;
+  color: #777;
+  display: block;
+  margin-top: 3px;
+}
+
+/* --- Pocket Folds (Clip-Path Polygons) --- */
+.env-pocket-left {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 0;
-  border-left: 135px solid #f6ede3;
-  border-right: 135px solid #f6ede3;
-  border-bottom: 105px solid #ebd9c8;
+  inset: 0;
+  background: #f2e4d6;
+  clip-path: polygon(0 0, 52% 50%, 0 100%);
+  border-radius: 8px 0 0 8px;
+  z-index: 3;
+}
+
+.env-pocket-right {
+  position: absolute;
+  inset: 0;
+  background: #e8d7c6;
+  clip-path: polygon(100% 0, 48% 50%, 100% 100%);
+  border-radius: 0 8px 8px 0;
+  z-index: 3;
+}
+
+.env-pocket-bottom {
+  position: absolute;
+  inset: 0;
+  background: #faefe4;
+  clip-path: polygon(0 100%, 50% 43%, 100% 100%);
   border-radius: 0 0 8px 8px;
+  filter: drop-shadow(0 -3px 4px rgba(0, 0, 0, 0.04));
   z-index: 4;
 }
 
-/* Wax Seal */
+/* --- Top Flap --- */
+.env-flap {
+  position: absolute;
+  inset: 0;
+  background: #eedccf;
+  clip-path: polygon(0 0, 100% 0, 50% 55%);
+  border-radius: 8px 8px 0 0;
+  transform-origin: top center;
+  z-index: 5;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.12));
+  /* When closing: waits 0.35s for photo to enter first */
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.35s;
+}
+
+/* --- Wax Seal (Locked to the exact tip of the flap) --- */
 .mini-wax-seal {
   position: absolute;
-  bottom: -38px;
-  left: -16px;
+  top: 53%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 32px;
   height: 32px;
-  background: radial-gradient(circle at 35% 35%, #e11d48, var(--rose-velvet) 65%, var(--rose-deep) 100%);
+  background: radial-gradient(circle at 35% 35%, #e11d48, #be185d 65%, #831843 100%);
   border-radius: 50%;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 13px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
   z-index: 6;
-  transition: opacity 0.3s ease 0.35s, transform 0.3s ease 0.35s;
-}
-
-/* Photo Snapshot: On closing, retreat immediately (0s delay) */
-.tucked-snapshot {
-  position: absolute;
-  top: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 200px;
-  height: 155px;
-  background: #ffffff;
-  padding: 8px 8px 24px 8px;
-  border-radius: 4px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  z-index: 2;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0s, z-index 0.1s 0.4s;
-  text-align: center;
-}
-
-.tucked-snapshot img {
-  width: 100%;
-  height: 125px;
-  object-fit: cover;
-  border-radius: 2px;
-  display: block;
-}
-
-.snapshot-note {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 13px;
-  color: #777;
-  display: block;
-  margin-top: 5px;
+  /* When closing: fades back in when flap lands */
+  transition: opacity 0.3s ease 0.55s, transform 0.3s ease 0.55s;
 }
 
 .pocket-label {
-  font-family: var(--font-serif);
+  font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
   font-style: italic;
-  color: #fff;
+  color: #ffffff;
   font-size: 14.5px;
   margin-top: 14px;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
   transition: opacity 0.3s ease;
 }
 
-/* ================= OPENING ORCHESTRATION ================= */
+/* ================= OPENING SEQUENCE ================= */
 
-/* Stage 1: Flap swings open immediately (0s delay) */
-.vellum-envelope.is-open .vellum-flap {
+/* 1. Flap swings up 180° immediately */
+.vellum-envelope.is-open .env-flap {
   transform: rotateX(180deg);
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s;
   z-index: 1;
 }
 
-/* Wax seal fades out immediately */
+/* Wax seal dissolves instantly */
 .vellum-envelope.is-open .mini-wax-seal {
   opacity: 0;
-  transform: scale(0.4);
+  transform: translate(-50%, -50%) scale(0.3);
+  pointer-events: none;
   transition: opacity 0.2s ease 0s, transform 0.2s ease 0s;
 }
 
-/* Stage 2: Photo waits for flap to complete, then ascends with an elastic pop (0.45s delay) */
+/* 2. Photo rises cleanly out of the pocket after flap clears */
 .vellum-envelope.is-open .tucked-snapshot {
-  transform: translateX(-50%) translateY(-95px) rotate(-2deg);
-  z-index: 10;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
-  transition: transform 0.65s cubic-bezier(0.18, 0.89, 0.32, 1.25) 0.45s;
+  transform: translateX(-50%) translateY(-110px) rotate(-2deg);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+  transition: transform 0.7s cubic-bezier(0.18, 0.89, 0.32, 1.25) 0.4s,
+    box-shadow 0.7s ease 0.4s;
 }
 
+/* ================= EDITORIAL JOURNAL NOTE CARD ================= */
+.keepsake-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 38px;
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+/* Luxury Paper Card Container */
+.journal-parchment {
+  flex: 1.25;
+  position: relative;
+  background: #ffffff !important;
+  /* Solid bright card for readable contrast */
+  padding: 38px 32px 30px 32px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 22px 50px rgba(15, 23, 42, 0.42),
+    0 4px 14px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  text-align: left;
+  z-index: 2;
+}
+
+/* Semi-transparent Pastel Washi Tape */
+.parchment-tape {
+  position: absolute;
+  top: -11px;
+  right: 44px;
+  width: 82px;
+  height: 22px;
+  background: rgba(254, 215, 170, 0.85);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transform: rotate(2.5deg);
+  border-radius: 2px;
+  backdrop-filter: blur(2px);
+}
+
+/* Top Badge */
+.journal-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.badge-dot {
+  color: #d4af37;
+  font-size: 11px;
+}
+
+.journal-date {
+  font-family: var(--font-sans, 'Montserrat', sans-serif);
+  font-size: 10.5px;
+  letter-spacing: 2px;
+  color: #be185d;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Serif Highlight Quote */
+.journal-quote {
+  font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(1.25rem, 2vw, 1.45rem);
+  line-height: 1.45;
+  color: #2d1820;
+  font-style: italic;
+  font-weight: 600;
+  margin: 0 0 14px 0;
+}
+
+/* Body Text */
+.journal-body {
+  font-family: var(--font-sans, 'Montserrat', sans-serif);
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: #554049;
+  font-weight: 300;
+  margin: 0;
+  letter-spacing: 0.15px;
+}
+
+/* Card Bottom Tag */
+.journal-footer {
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(190, 24, 93, 0.2);
+}
+
+.handwritten-tag {
+  font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
+  font-style: italic;
+  font-size: 14px;
+  color: #be185d;
+  letter-spacing: 0.5px;
+}
+
+/* Mobile Screens */
+@media (max-width: 768px) {
+  .keepsake-grid {
+    flex-direction: column;
+    gap: 34px;
+  }
+
+  .journal-parchment {
+    width: 100%;
+    padding: 28px 20px 22px 20px;
+  }
+
+  .journal-quote {
+    font-size: 1.2rem;
+  }
+
+  .journal-body {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+}
 
 
 /* ================= 3. KODAK PORTRA 400 FILM STRIP ================= */
@@ -598,13 +735,19 @@ body.scrollable-page {
   width: 100%;
   max-width: 860px;
   background: #111114;
-  padding: 26px 22px;
+  padding: 26px 20px;
   border-radius: 14px;
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
-  border-top: 9px dashed #3f3f46;
-  border-bottom: 9px dashed #3f3f46;
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.6),
+    0 5px 15px rgba(0, 0, 0, 0.4);
+  /* Perforated 35mm film edge sprockets */
+  border-top: 9px dashed #3a3a40;
+  border-bottom: 9px dashed #3a3a40;
+  position: relative;
+  box-sizing: border-box;
 }
 
+/* Header Bar */
 .film-bar {
   display: flex;
   justify-content: space-between;
@@ -614,32 +757,70 @@ body.scrollable-page {
   color: #fbbf24;
   font-size: 11px;
   letter-spacing: 3px;
+  font-family: var(--font-sans, 'Montserrat', sans-serif);
+}
+
+.film-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .film-ribbon {
-  margin-right: 8px;
+  font-size: 14px;
+}
+
+.film-brand strong {
+  font-weight: 600;
+  color: #fde047;
 }
 
 .film-meta {
   color: rgba(255, 255, 255, 0.5);
-  margin-left: 10px;
+  margin-left: 6px;
+  font-size: 10px;
   font-weight: 400;
 }
 
 .film-iso {
   color: #fde047;
   font-weight: 500;
+  font-size: 10.5px;
 }
 
+/* Horizontal Track with Smooth Scrolling */
 .film-negative-track {
   display: flex;
-  gap: 20px;
+  gap: 18px;
   overflow-x: auto;
-  padding-bottom: 14px;
-  scrollbar-width: thin;
+  overflow-y: hidden;
+  padding: 8px 6px 16px 6px;
   scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(251, 191, 36, 0.5) rgba(255, 255, 255, 0.08);
 }
 
+/* Custom Scrollbar for WebKit */
+.film-negative-track::-webkit-scrollbar {
+  height: 6px;
+}
+
+.film-negative-track::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+}
+
+.film-negative-track::-webkit-scrollbar-thumb {
+  background: rgba(251, 191, 36, 0.45);
+  border-radius: 10px;
+}
+
+.film-negative-track::-webkit-scrollbar-thumb:hover {
+  background: rgba(251, 191, 36, 0.75);
+}
+
+/* Individual 35mm Frame */
 .negative-frame {
   position: relative;
   flex: 0 0 185px;
@@ -649,20 +830,26 @@ body.scrollable-page {
   overflow: hidden;
   border: 3px solid #27272a;
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
-  transition: transform 0.35s ease;
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
   scroll-snap-align: start;
+  user-select: none;
 }
 
 .negative-frame:hover {
-  transform: translateY(-8px) scale(1.04);
+  transform: translateY(-8px) scale(1.03);
+  border-color: rgba(251, 191, 36, 0.6);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.7);
 }
 
 .negative-frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+  pointer-events: none;
 }
 
+/* Authentic Edge Frame Stamp */
 .frame-stamp {
   position: absolute;
   bottom: 8px;
@@ -670,15 +857,51 @@ body.scrollable-page {
   font-size: 10px;
   color: rgba(255, 255, 255, 0.75);
   letter-spacing: 1.5px;
+  font-family: monospace;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
 }
 
+/* Bottom Hint */
 .film-caption {
-  font-family: var(--font-serif);
+  font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
   font-style: italic;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.55);
   text-align: center;
-  margin-top: 12px;
+  margin-top: 14px;
+  margin-bottom: 0;
+  letter-spacing: 0.5px;
+}
+
+/* Mobile Screen Adaptation */
+@media (max-width: 768px) {
+  .film-negative-casing {
+    padding: 18px 12px;
+    border-top-width: 7px;
+    border-bottom-width: 7px;
+  }
+
+  .film-bar {
+    font-size: 9.5px;
+    letter-spacing: 1.5px;
+    margin-bottom: 14px;
+  }
+
+  .film-meta {
+    display: none;
+    /* Keeps the header uncluttered on small screens */
+  }
+
+  .negative-frame {
+    flex: 0 0 145px;
+    height: 190px;
+  }
+
+  .film-negative-track {
+    gap: 12px;
+    padding-bottom: 10px;
+  }
 }
 
 /* ================= 4. THREE PROMISES CARDS ================= */
@@ -1147,22 +1370,56 @@ body.scrollable-page {
 
 /* ================= MOBILE OPTIMIZATIONS ================= */
 @media (max-width: 768px) {
+
   /* Reduce outer page side padding so cards have room to breathe */
   .editorial-container {
     padding: 50px 14px 90px 14px;
   }
 
   /* Scrapbook responsive layout */
-  .binder-book { flex-direction: column; }
-  .metallic-spine { width: 100%; height: 18px; flex-direction: row; }
-  .ring-socket { width: 16%; height: 100%; }
-  .titanium-ring { width: 13px; height: 32px; }
-  .leaf-left { border-radius: 16px 16px 0 0; border-right: none; }
-  .leaf-right { border-radius: 0 0 16px 16px; border-left: none; padding: 35px 20px; }
+  .binder-book {
+    flex-direction: column;
+  }
 
-  .keepsake-grid { flex-direction: column; }
-  .promises-row { grid-template-columns: 1fr; }
-  .negative-frame { flex: 0 0 150px; height: 190px; }
+  .metallic-spine {
+    width: 100%;
+    height: 18px;
+    flex-direction: row;
+  }
+
+  .ring-socket {
+    width: 16%;
+    height: 100%;
+  }
+
+  .titanium-ring {
+    width: 13px;
+    height: 32px;
+  }
+
+  .leaf-left {
+    border-radius: 16px 16px 0 0;
+    border-right: none;
+  }
+
+  .leaf-right {
+    border-radius: 0 0 16px 16px;
+    border-left: none;
+    padding: 35px 20px;
+  }
+
+  .keepsake-grid {
+    flex-direction: column;
+  }
+
+  .promises-row {
+    grid-template-columns: 1fr;
+  }
+
+  .negative-frame {
+    flex: 0 0 150px;
+    height: 190px;
+  }
 
   /* --- Stamp Note & Cassette Mobile Fix --- */
   .scalloped-stamp-card {
@@ -1172,7 +1429,8 @@ body.scrollable-page {
   }
 
   .stamp-border-wrapper {
-    padding: 24px 14px; /* Reduced from 40px 30px so content fits */
+    padding: 24px 14px;
+    /* Reduced from 40px 30px so content fits */
     border-radius: 10px;
   }
 

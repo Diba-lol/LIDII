@@ -128,48 +128,62 @@
     <section class="story-section" data-reveal="fade-up">
       <div class="keepsake-grid">
 
-        <!-- Clickable Keepsake Envelope -->
+        <!-- Left: Interactive Envelope -->
         <div class="vellum-pocket-card" data-stagger="left" onclick="togglePocketEnvelope()">
           <div class="vellum-envelope" id="pocketEnvelope">
-            <!-- Solid interior prevents background from bleeding through triangular folds -->
-            <div class="envelope-interior"></div>
+            <div class="env-interior"></div>
 
-            <div class="vellum-flap"></div>
-
-            <!-- Photo that pulls up when opened -->
             <div class="tucked-snapshot" id="tuckedPhoto">
-              <img src="./images/img10.jpeg" alt="Lidi Memory"/>
-              <span class="snapshot-note">always you, lidi ♡</span>
+              <img src="./images/img10.jpeg" alt="Sweet Moment"/>
+              <span class="snapshot-note">I LOVE YOU ♡</span>
             </div>
 
-            <!-- Front pocket with wax seal -->
-            <div class="vellum-pocket-front">
-              <div class="mini-wax-seal" id="pocketSeal">☾</div>
-            </div>
+            <div class="env-pocket-left"></div>
+            <div class="env-pocket-right"></div>
+            <div class="env-pocket-bottom"></div>
+            <div class="env-flap"></div>
+            <div class="mini-wax-seal" id="pocketSeal">☾</div>
           </div>
           <p class="pocket-label" id="pocketLabel">tap envelope to open 💌</p>
         </div>
 
-        <!-- Editorial Journal Note -->
-        <div class="journal-parchment" data-stagger="right">
+        <!-- Right: Editorial Scrapbook Journal Card -->
+        <article class="journal-parchment" data-stagger="right">
+          <!-- Washi Tape Accent -->
           <div class="parchment-tape"></div>
-          <span class="journal-date">NOVEMBER 9TH • A SPECIAL RECORD</span>
-          <p class="journal-quote">
-            "It is funny how a whole year can pass by, yet all the best days remain completely frozen in time with you."
-          </p>
+
+          <!-- Date Badge -->
+          <div class="journal-badge">
+            <span class="badge-dot">✦</span>
+            <span class="journal-date">SEPTEMBER 26, 2026 • OUR FIRST MEET & FIRST DATE</span>
+          </div>
+
+          <!-- Highlight Quote -->
+          <h3 class="journal-quote">
+            "The moment I finally saw you, my entire world quietly fell into place."
+          </h3>
+
+          <!-- Narrative Paragraph -->
           <p class="journal-body">
-            If I could keep a little wooden box filled with everything from this year, it would be packed with silly
-            laughs, late-night car rides, blurry candid photos, and every single time you smiled at me.
+            September 26th will forever be my favorite day of 2026. From the nervous butterflies of finally meeting you
+            in person, to sitting side-by-side during our first movie date, roaming through the city on the scooty with
+            you holding onto me, walking along the beach with our fingers intertwined, and laughing as we shared ice
+            cream—every single second felt effortless, warm, and like home. That day was the beginning of us, and loving
+            you, my sweet Lidi, is the easiest choice I will ever make.
           </p>
-        </div>
+
+          <!-- Little Handwritten Footer -->
+          <div class="journal-footer">
+            <span class="handwritten-tag">the day my favorite story began 🤍</span>
+          </div>
+        </article>
 
       </div>
     </section>
 
-    <!-- ================= 3. KODAK PORTRA 400 35MM FILM STRIP ================= -->
+    <!-- ================= 3. KODAK PORTRA 400 FILM STRIP ================= -->
     <section class="story-section" data-reveal="slide-up">
       <div class="film-negative-casing">
-
         <div class="film-bar">
           <div class="film-brand">
             <span class="film-ribbon">🎀</span>
@@ -179,10 +193,9 @@
           <span class="film-iso">ISO 400 / 27°</span>
         </div>
 
-        <!-- 35mm Frame Strip with Sprockets -->
         <div class="film-negative-track">
           <div class="negative-frame" data-stagger="item">
-            <img src="./images/img1.jpeg" alt="Frame 1"/>
+            <img src="./images/img1.jpeg" alt="Frame 1" />
             <span class="frame-stamp">01 • A</span>
           </div>
           <div class="negative-frame" data-stagger="item">
@@ -194,7 +207,7 @@
             <span class="frame-stamp">03 • A</span>
           </div>
           <div class="negative-frame" data-stagger="item">
-            <img src="./images/img7.jpeg" alt="Frame 4"/>
+            <img src="./images/img7.jpeg" alt="Frame 4" />
             <span class="frame-stamp">04 • A</span>
           </div>
           <div class="negative-frame" data-stagger="item">
@@ -202,16 +215,16 @@
             <span class="frame-stamp">05 • A</span>
           </div>
           <div class="negative-frame" data-stagger="item">
-            <img src="./images/img2.jpeg" alt="Frame 5" />
-            <span class="frame-stamp">05 • A</span>
+            <img src="./images/img2.jpeg" alt="Frame 6" />
+            <span class="frame-stamp">06 • A</span>
           </div>
           <div class="negative-frame" data-stagger="item">
-            <img src="./images/img9.jpeg" alt="Frame 5" />
-            <span class="frame-stamp">05 • A</span>
+            <img src="./images/img9.jpeg" alt="Frame 7" />
+            <span class="frame-stamp">07 • A</span>
           </div>
           <div class="negative-frame" data-stagger="item">
-            <img src="./images/img6.jpeg" alt="Frame 5" />
-            <span class="frame-stamp">05 • A</span>
+            <img src="./images/img6.jpeg" alt="Frame 8" />
+            <span class="frame-stamp">08 • A</span>
           </div>
         </div>
 
@@ -228,21 +241,24 @@
           <div class="promise-tile" data-stagger="item">
             <div class="tile-icon">🕊️</div>
             <h4>Your Safe Haven</h4>
-            <p>On tough days, busy weeks, or whenever you feel tired, you'll always have a place where you can exhale
+            <p>On tough days, busy weeks, or whenever you feel tired, you'll always have a place where you can
+              exhale
               and just be yourself.</p>
           </div>
 
           <div class="promise-tile center-gold-tile" data-stagger="item">
             <div class="tile-icon">🌙</div>
             <h4>Choosing You Forever</h4>
-            <p>Not just when things are smooth and easy, but through every single chapter. I choose you for every one of
+            <p>Not just when things are smooth and easy, but through every single chapter. I choose you for every
+              one of
               our tomorrows.</p>
           </div>
 
           <div class="promise-tile" data-stagger="item">
             <div class="tile-icon">🍰</div>
             <h4>Every Birthday Together</h4>
-            <p>To celebrate you, cheer for you, and stand beside you for every single wish and candle you blow out for
+            <p>To celebrate you, cheer for you, and stand beside you for every single wish and candle you blow out
+              for
               the rest of our lives.</p>
           </div>
         </div>
