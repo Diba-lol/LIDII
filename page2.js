@@ -104,7 +104,7 @@ function toggleMelody() {
       audio.play().then(() => {
         isAudioPlaying = true;
         if (cassette) cassette.classList.add('spinning');
-        if (prompt) prompt.textContent = 'playing our melody 🎵';
+        if (prompt) prompt.textContent = 'My Girl 🎵';
       }).catch(() => {
         // Fallback to built-in synthesizer if MP3 fails
         fallbackSynth(cassette, prompt);
@@ -136,7 +136,7 @@ function fallbackSynth(cassette, prompt) {
 
   if (isAudioPlaying) {
     if (cassette) cassette.classList.add('spinning');
-    if (prompt) prompt.textContent = 'playing our melody 🎵';
+    if (prompt) prompt.textContent = 'MY GIRL 🎵';
 
     try {
       if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
