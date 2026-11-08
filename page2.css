@@ -781,7 +781,9 @@ body.scrollable-page {
 
 /* Luxury Smoked Acrylic Cassette */
 .acrylic-cassette {
-  width: 270px;
+  width: 100%;
+  max-width: 270px;
+  box-sizing: border-box;
   margin: 0 auto;
   background: #231b20;
   border-radius: 12px;
@@ -1143,49 +1145,70 @@ body.scrollable-page {
   border-color: #ffffff;
 }
 
-/* Responsive */
+/* ================= MOBILE OPTIMIZATIONS ================= */
 @media (max-width: 768px) {
-  .binder-book {
-    flex-direction: column;
+  /* Reduce outer page side padding so cards have room to breathe */
+  .editorial-container {
+    padding: 50px 14px 90px 14px;
   }
 
-  .metallic-spine {
-    width: 100%;
-    height: 18px;
-    flex-direction: row;
+  /* Scrapbook responsive layout */
+  .binder-book { flex-direction: column; }
+  .metallic-spine { width: 100%; height: 18px; flex-direction: row; }
+  .ring-socket { width: 16%; height: 100%; }
+  .titanium-ring { width: 13px; height: 32px; }
+  .leaf-left { border-radius: 16px 16px 0 0; border-right: none; }
+  .leaf-right { border-radius: 0 0 16px 16px; border-left: none; padding: 35px 20px; }
+
+  .keepsake-grid { flex-direction: column; }
+  .promises-row { grid-template-columns: 1fr; }
+  .negative-frame { flex: 0 0 150px; height: 190px; }
+
+  /* --- Stamp Note & Cassette Mobile Fix --- */
+  .scalloped-stamp-card {
+    padding: 10px;
+    border-radius: 14px;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.4);
   }
 
-  .ring-socket {
-    width: 16%;
-    height: 100%;
+  .stamp-border-wrapper {
+    padding: 24px 14px; /* Reduced from 40px 30px so content fits */
+    border-radius: 10px;
   }
 
-  .titanium-ring {
-    width: 13px;
-    height: 32px;
+  /* Keeps "CHAPTER OF US • SIDE A 💌" on one clean line */
+  .stamp-tagline {
+    font-size: 9.5px;
+    letter-spacing: 1.8px;
+    margin-bottom: 14px;
   }
 
-  .leaf-left {
-    border-radius: 16px 16px 0 0;
-    border-right: none;
+  .stamp-verse {
+    font-size: 1.15rem;
+    line-height: 1.55;
+    margin-bottom: 22px;
   }
 
-  .leaf-right {
-    border-radius: 0 0 16px 16px;
-    border-left: none;
-    padding: 35px 20px;
+  .acrylic-cassette {
+    max-width: 250px;
+    padding: 12px 10px;
   }
 
-  .keepsake-grid {
-    flex-direction: column;
+  .cassette-top {
+    font-size: 8.5px;
+    letter-spacing: 0.5px;
   }
 
-  .promises-row {
-    grid-template-columns: 1fr;
+  .tape-viewport {
+    padding: 8px 12px;
   }
 
-  .negative-frame {
-    flex: 0 0 150px;
-    height: 190px;
+  .tape-wheel {
+    width: 26px;
+    height: 26px;
+  }
+
+  .cas-cta {
+    font-size: 10.5px;
   }
 }
